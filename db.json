@@ -1,0 +1,6 @@
+{
+  "employees": [
+    { "id": 1, "name": "John Doe", "email": "john@example.com", "department": "HR", "joiningDate": "2022-01-15" },
+    { "id": 2, "name": "Jane Smith", "email": "jane@example.com", "department": "Engineering", "joiningDate": "2021-08-10" }
+  ]
+}
