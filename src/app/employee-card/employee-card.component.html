@@ -1,0 +1,10 @@
+<div class="card" *ngFor="let employee of employees">
+    <div class="card-body">
+      <h5 class="card-title">{{ employee.name }}</h5>
+      <p class="card-text">Department: {{ employee.department }}</p>
+      <p class="card-text">Email: {{ employee.email }}</p>
+      <p class="card-text">Joined on: {{ employee.joiningDate | date }}</p>
+      <button mat-button (click)="deleteEmployee(employee.id)">Delete</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,9 @@
+<form (ngSubmit)="addEmployee()" #employeeForm="ngForm">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="newEmployee.name" name="name" required>
+    </mat-form-field>
+    <!-- Additional form fields for Email, Department, Joining Date -->
+    <button mat-raised-button color="primary" type="submit">Add Employee</button>
+  </form>
+  
