@@ -6,7 +6,10 @@ import { Employee } from '../services/employee.service';
 })
 export class DepartmentFilterPipe implements PipeTransform {
   transform(employees: Employee[], department: string): Employee[] {
-    if (!department) return employees;
-    return employees.filter(employee => employee.department === department);
+    
+    if (!department || department =='') 
+        return employees;
+
+    return employees.filter(employee => employee.department == department);
   }
 }

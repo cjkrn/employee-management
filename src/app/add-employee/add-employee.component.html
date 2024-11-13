@@ -1,9 +1,42 @@
-<form (ngSubmit)="addEmployee()" #employeeForm="ngForm">
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput [(ngModel)]="newEmployee.name" name="name" required>
-    </mat-form-field>
-    <!-- Additional form fields for Email, Department, Joining Date -->
-    <button mat-raised-button color="primary" type="submit">Add Employee</button>
-  </form>
-  
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="employeeName">Name:</label>
+          <input type="text" class="form-control" placeholder="Enter Name" [(ngModel)]="name" name="employeeName" required />
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="employeeDepartment">Department:</label>
+          <select class="form-control" [(ngModel)]="department" name="employeeDepartment" required>
+            <option value="" disabled selected>Select Department</option>
+            <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="employeeEmail">Email:</label>
+          <input type="email" class="form-control" placeholder="Enter Email" [(ngModel)]="email" name="employeeEmail" required />
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="employeeJoiningDate">Joining Date:</label>
+          <input type="date" class="form-control" [(ngModel)]="joiningDate" name="employeeJoiningDate" required />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <button mat-button class="btn btn-primary" (click)="addEmployee()">Add Employee</button>
+  </div>
+</div>

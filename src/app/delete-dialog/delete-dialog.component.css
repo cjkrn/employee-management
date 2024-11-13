@@ -1,0 +1,9 @@
+.mat-dialog-container {
+    position: relative;
+    z-index: 10000;
+    padding: 20px;
+  }
+  
+  button {
+    margin-top: 20px;
+  }

@@ -1,3 +1,48 @@
-<app-add-employee (employeeAdded)="fetchEmployees()"></app-add-employee>
-<app-employee-list></app-employee-list>
-<app-employee-card></app-employee-card>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1>{{ title }}</h1>
+      <div class="d-flex">
+        <button class="btn btn-primary mr-3" (click)="showAddComp = true">+ Add Employee</button>
+
+          <div class="form-group" style="margin-left: 5%;">
+            <!-- <label for="departmentFilter">Filter Department</label> -->
+            <select class="form-control" id="departmentFilter" [(ngModel)]="selectedDepartment">
+              <option value="">All Departments</option>
+              <option *ngFor="let department of uniqueDepartments" [value]="department">{{ department }}</option>
+            </select>
+          </div>
+      </div>
+      
+    </div>
+  
+  
+    <div *ngIf="showCard" class="fullscreen-card">
+    <div class="card-container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Card View</h1>
+            <div class="d-flex">
+                <button class="btn btn-secondary" (click)="showCard = false">Close</button>
+            </div>
+        </div>
+        <app-employee-card (employeeDeleted)="onEmployeeChange()" [employee]="selectedEmployee"></app-employee-card>
+    </div>
+    </div>
+
+    <div *ngIf="showAddComp" class="fullscreen-card">
+        <div class="card-container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Add Employee</h1>
+                <div class="d-flex">
+                    <button class="btn btn-secondary" (click)="showAddComp = false">Close</button>
+                </div>
+            </div>
+            <app-add-employee (employeeAdded)="onEmployeeChange()"></app-add-employee>
+        </div>
+    </div>
+  
+    <app-employee-list
+      [employees]="employees | departmentFilter:selectedDepartment"
+      (employeeSelected)="onEmployeeSelected($event)"
+    ></app-employee-list>
+  </div>
+  

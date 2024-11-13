@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 
 export interface Employee {
-  id: number;
+  id: string ;
   name: string;
   email: string;
   department: string;
@@ -23,10 +23,23 @@ export class EmployeeService {
   }
 
   addEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.apiUrl, employee);
+    return this.http.get<Employee[]>(this.apiUrl).pipe(
+      map((employees) => {
+        const maxId = employees.reduce((max, emp) => Math.max(max, Number(emp.id)), 0);      
+        employee.id = (maxId + 1).toString();
+        return employee;
+      }),
+      switchMap((employeeWithId) => {
+        return this.http.post<Employee>(this.apiUrl, employeeWithId);
+      })
+    );
   }
 
-  deleteEmployee(id: number): Observable<void> {
+  updateEmployee(employee: Employee): Observable<Employee> {
+    return this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee);
+  }
+
+  deleteEmployee(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
